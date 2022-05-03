@@ -38,3 +38,6 @@ class Generator(nn.Module):
             # not sure why this works better
             nn.Tanh(),
         )
+
+    def forward(self, x):
+        return self.net(x)

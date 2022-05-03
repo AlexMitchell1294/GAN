@@ -30,3 +30,6 @@ class Discriminator(nn.Module):
             nn.Conv2d(features_d * 16, 1, kernel_size=4, stride=2, padding=0),
             nn.Sigmoid(),
         )
+
+    def forward(self, x):
+        return self.net(x)

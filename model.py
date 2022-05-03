@@ -6,9 +6,11 @@ from torch.utils.tensorboard import SummaryWriter
 from Discriminator import Discriminator
 from Generator import Generator
 import utils
+import numpy as np
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(device)
 
 discriminator = Discriminator(utils.channels_img, utils.discriminator_features).to(device)
 generator = Generator(utils.channels_noise, utils.channels_img, utils.generator_features).to(device)
@@ -32,7 +34,7 @@ for epoch in range(utils.num_epochs):
     for batch_index, (data, targets) in enumerate(utils.dataloader):
         data = data.to(device)
         image = data[:32]
-        batch_size = data.shape[0] #* data.shape[1] * data.shape[1]
+        batch_size = data.shape[0] * data.shape[1] * data.shape[1]
 
         discriminator.zero_grad()
         label = (torch.ones(batch_size) * 0.9).to(device)
